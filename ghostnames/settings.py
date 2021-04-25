@@ -17,9 +17,9 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Force GOOGLE_APPLICATION_CREDENTIALS env var
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(
-    BASE_DIR, 'gohst-names-9c8c13655a47.json'
-)
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(
+#     BASE_DIR, 'gohst-names-9c8c13655a47.json'
+# )
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-_79$7gf@t4an8@^f$o!lf3(k=n-8!$3%0o+md6_x6$84msmaz3'
