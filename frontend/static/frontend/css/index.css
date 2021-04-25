@@ -1,0 +1,198 @@
+body{
+    background: #000;
+}
+
+.brand{
+    position: absolute;
+    transform: rotate(-90deg);
+    left: -10rem;
+    top: 50%;
+    font-size: 5.5rem;
+}
+
+/* ************************************** */
+/* STYLES FOR SCROLLBAR */
+
+.names-container::-webkit-scrollbar {
+  width: 1em;
+}
+
+.names-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.names-container::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+/* ************************************** */
+/* ************************************** */
+
+
+/* ************************************** */
+/* GOSHT NAMES STYLES */
+
+.names-container{
+  max-height: 80vh;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.name-wraper{
+    min-height: 5rem;
+    font-size: 2.5rem;
+    position: relative;
+    color:white;
+    width: 100%;
+}
+
+.ghost-name{
+    font-size: 5rem;
+    filter: blur(1.8px);
+}
+
+.name-picker-title{
+  filter: blur(1.3px);
+}
+
+.name{
+    position: absolute;
+    color: white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transform: translate(0,-15%) skew(-10deg);
+    opacity: 0.5;
+    text-shadow: -4px 5px 10px #ffffff6b;
+}
+/* ************************************** */
+/* ************************************** */
+
+/* ************************************** */
+/* BUTTON STYLES */
+
+button, a {
+  color: white;
+  filter: blur(1.1px);
+}
+
+.-btn{
+  cursor: pointer;
+}
+
+.back-arrow{
+    cursor: pointer;
+    border-color: white;
+    border-width: 10px 0px 0px 10px;
+    border-style: solid;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 30px;
+    top: 30px;
+}
+
+.-btn:hover{
+  text-shadow: 0 10px 10px #ffffff;
+}
+
+a:hover{
+  color: white;
+}
+
+button:hover, a:hover, .-btn:hover, .-selected {
+  animation: spookyBtn 3.5s infinite linear !important;
+  filter: blur(1.05px);
+}
+
+/* ************************************** */
+/* ************************************** */
+
+
+/* ************************************** */
+/* BOOSTRAP TOOLTIP MODIFICATIONS */
+
+.arrow::before {
+  border-bottom-color: white !important;
+}
+.tooltip-inner {
+  background-color: white !important;
+  color: #000 !important;
+  max-width: 500px;
+}
+
+/* ************************************** */
+/* ************************************** */
+
+/* ************************************** */
+/* INPUT STYLES */
+
+.disabled{
+  pointer-events: none;
+}
+
+.-selected{
+  text-decoration: underline;
+}
+
+.input-label{
+  font-size: 1.5rem;
+  color: #ffffff91;
+}
+
+/* ************************************** */
+/* ************************************** */
+
+/* ************************************** */
+/* GOSHT SVG */
+svg {
+  left: -10%;
+  width: 50px;
+  position: absolute;
+  animation: spookyGhostMove 5s linear !important;
+}
+/* ************************************** */
+/* ************************************** */
+
+/* ANIMATIONS */
+@keyframes spookyBtn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spookyGhostMove {
+  0% {
+    opacity: 1;
+    left: -10%;
+    top: 10%;
+    transform: scaleX(-1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+    top: 60%;
+  }
+  100% {
+    transform: translate(0,-0%) skew(0);
+    opacity: 1;
+    transform: scale(1);
+    left: 110%;
+    top: 30%;
+    transform: scaleX(1);
+    display: block;
+  }
+}

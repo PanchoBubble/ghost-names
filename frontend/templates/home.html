@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block content %}
+  <div class="brand"> PHANTOM </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-3 mt-md-5">
+        <dic class="actions {% if user.is_authenticated %} d-flex justify-content-between flex-column flex-md-row {%endif%}">
+          <!-- If user is logged check if it has a gosht name assigned to set btn caption -->
+          {% if user.is_authenticated %}
+            <a href="{% url 'pick-name' %}" class="btn btn-outline-light btn-lg">
+              {% if user.ghostname %}
+                  Change your current Phantom name
+              {% else %}
+                  Get a Phantom name
+              {% endif %}
+            </a>
+            <a href="{% url 'logout' %}" class="btn">
+              Logout
+            </a>
+          {% else %}
+            <a href="{% provider_login_url 'google' %}" class="btn btn-outline-light btn-lg">
+              Login
+            </a>
+          {% endif %}
+        </dic>
+      </div>
+
+      <div class="col-12 mt-5 names-container">
+        {% for ghost in ghost_names  %}
+          <div class="name-wraper my-2 d-flex justify-content-center">
+            {% if ghost.user %}
+              <p class="name">
+               {{ghost.first_name}}
+                <span class="ghost-name">{{ghost.name}}</span>
+               {{ghost.last_name}}
+              </p>
+            {% else %}
+              <span class="name ghost-name">{{ghost.name}}</span>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* ADDS BREAKPOINTS */
+    @media screen and (max-width: 1025px) {
+      .brand{
+        left: -10rem;
+      }
+      .name-wraper{
+        min-height: 3rem !important;
+        font-size: 1rem !important;
+      }
+      .ghost-name{
+        font-size: 3rem !important;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .brand{
+        display: none;
+      }
+      .name-wraper{
+        min-height: 2rem !important;
+        font-size: 1.2rem !important;
+      }
+      .ghost-name{
+        font-size: 2rem !important;
+      }
+    }
+  </style>
+
+{% endblock content %}

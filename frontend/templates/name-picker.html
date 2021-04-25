@@ -1,0 +1,128 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <a href="{% url 'home' %}"> <div class="back-arrow"> </div> </a>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 mb-3 mt-5 mb-mb-5">
+                <h1 class="text-light name-picker-title">
+                    {% if user.ghostname_set.values.0 %}
+                        Change your current Phantom name
+                    {% else %}
+                        Pick a Phantom name
+                    {% endif %}
+                </h1>
+            </div>
+            <div class="col-12">
+
+                <form action="{% url 'pick-name' %}" method="post" id="setGhostName" onsubmit="handleSubmit()">
+                    {% csrf_token %}
+                    {% for ghost in names_options  %}
+                        <div class="name-wraper my-3 d-flex justify-content-center">
+                            <input required
+                                class="d-none"
+                                value="{{ghost.id}}"
+                                type="radio"
+                                name="picked_ghost"
+                                id="ghost_{{ghost.id}}"
+                                onclick="handleSelected(event)"
+                            >
+                            <label
+                                class="name ghost-name white-tooltip -btn -animate"
+                                for="ghost_{{ghost.id}}"
+                                name="ghost_{{ghost.id}}"
+                                rel="tooltip"
+                                title="{% if ghost.description %} {{ghost.description}} {% else %} Just a nice soopky name {% endif %}"
+                            >
+                                {{ghost.name}}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div class="mt-5 p-3">
+                        <div class="form-group">
+                            <label for="first_name" class="input-label">First Name</label>
+                            <input
+                                required
+                                type="text"
+                                class="form-control"
+                                id="first_name"
+                                name="first_name"
+                                {% if user.ghostname %}
+                                    value="{{user.ghostname.first_name}}"
+                                {% else %}
+                                    value="{{user.first_name}}"
+                                {% endif %}
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name" class="input-label">Last Name</label>
+                            <input
+                                required
+                                type="text"
+                                class="form-control"
+                                id="last_name"
+                                name="last_name"
+                                {% if user.ghostname %}
+                                    value="{{user.ghostname.last_name}}"
+                                {% else %}
+                                    value="{{user.last_name}}"
+                                {% endif %}
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-light btn-lg w-100 mt-3 disabled">Get name!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include './svgs/ghost.svg' %}
+
+    <script>
+        // Disable submit until ghost name is selected and underlines selected option
+        function handleSelected(event){
+            $('button').removeClass('disabled')
+            $('label').removeClass('-selected')
+            $(`label[name=${event.target.id}]`).addClass('-selected')
+        }
+
+        // Activate tooltips
+        $(function () {
+            $('[rel="tooltip"]').tooltip()
+        })
+
+        // Disable button on submit
+        function handleSubmit(){
+            $('button[type=submit]').addClass('disabled')
+
+        }
+    </script>
+    <style>
+        /* Breakpoint styles for small devices */
+        @media screen and (max-width: 600px) {
+            .name-picker-title{
+                font-size: 1.5rem;
+                text-align: center;
+                padding-top: 1rem;
+                text-decoration: underline;
+            }
+            .name-wraper{
+                min-height: 2.5rem !important;
+            }
+            .ghost-name{
+                font-size: 2.5rem !important;
+            }
+            .svg-ghost{
+                display: none;
+            }
+            .back-arrow{
+                border-width: 5px 0px 0px 5px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+
+{% endblock %}
